@@ -56,6 +56,8 @@ let networkService = NetworkService(configuration: .default)
 let subscription = networkService
     .fetchProfile(userName: "jiyeonjoy")
     .receive(on: RunLoop.main)
+    .print() // 로그 찍기 
+    .retry(3) // 에러 시 3번 까지 요청
     .sink { error in
         print("error: \(error)")
     } receiveValue: { profile in
